@@ -15,6 +15,7 @@ namespace RestfulQr.Core.Auth
     public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthenticationOptions>
     {
         private readonly IApiKeyService apiKeyService;
+        private readonly ApiKeyProvider apiKeyProvider;
         private const string ProblemDetailsContentType = "application/problem+json";
         private const string ApiKeyHeaderName = "X-Api-Key";
         public ApiKeyAuthenticationHandler(
@@ -22,11 +23,18 @@ namespace RestfulQr.Core.Auth
             UrlEncoder encoder,
             ISystemClock clock,
             IOptionsMonitor<ApiKeyAuthenticationOptions> options,
-            IApiKeyService apiKeyService) : base(options, logger, encoder, clock)
+            IApiKeyService apiKeyService,
+            ApiKeyProvider apiKeyProvider) : base(options, logger, encoder, clock)
         {
             this.apiKeyService = apiKeyService;
+            this.apiKeyProvider = apiKeyProvider;
         }
 
+        /// <summary>
+        /// Authenticates a request by ensuring the X-Api-Key header is present with an
+        /// API key that exists in a backing store
+        /// </summary>
+        /// <returns></returns>
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             if (!Request.Headers.TryGetValue(ApiKeyHeaderName, out var apiKeyHeaderValues))
@@ -58,9 +66,17 @@ namespace RestfulQr.Core.Auth
             var principal = new ClaimsPrincipal(identities);
             var ticket = new AuthenticationTicket(principal, Options.Scheme);
 
+            // Make the API key accessible via scoped class ApiKeyProvider
+            apiKeyProvider.ApiKey = providedKey;
+
             return AuthenticateResult.Success(ticket);
         }
 
+        /// <summary>
+        /// Handle unauthorized calls
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <returns></returns>
         protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
         {
             Response.StatusCode = 401;
@@ -70,6 +86,11 @@ namespace RestfulQr.Core.Auth
             await Response.WriteAsync(JsonSerializer.Serialize(problemDetails));
         }
 
+        /// <summary>
+        /// Handles a forbidden call
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <returns></returns>
         protected override async Task HandleForbiddenAsync(AuthenticationProperties properties)
         {
             Response.StatusCode = 403;

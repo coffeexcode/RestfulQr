@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using RestfulQr.Services;
 using System;
 using System.Linq;
@@ -16,11 +17,14 @@ namespace RestfulQr.Controllers.Api.V1
     public class ApiKeyController : ControllerBase
     {
         private readonly IApiKeyService apiKeyService;
+        private readonly ILogger<ApiKeyController> logger;
 
         public ApiKeyController(
-            IApiKeyService apiKeyService)
+            IApiKeyService apiKeyService,
+            ILogger<ApiKeyController> logger)
         {
             this.apiKeyService = apiKeyService;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -46,6 +50,7 @@ namespace RestfulQr.Controllers.Api.V1
             }
             catch (Exception e)
             {
+                logger.LogCritical(e, "An error occured while creating a new api key");
                 return StatusCode(500);
             }
         }
@@ -80,6 +85,7 @@ namespace RestfulQr.Controllers.Api.V1
             }
             catch (Exception e)
             {
+                logger.LogCritical(e, $"An error occured while trying to delete an api key '{apiKey}'");
                 return StatusCode(500);
             }
         }

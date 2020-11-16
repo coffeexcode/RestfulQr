@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using System;
 
 namespace RestfulQr.Entities
 {
@@ -7,6 +10,8 @@ namespace RestfulQr.Entities
     /// </summary>
     public class RestfulQrDbContext : DbContext
     {
+        private readonly IWebHostEnvironment environment;
+
         /// <summary>
         /// All api keys
         /// <see cref="ApiKey"/>
@@ -19,9 +24,9 @@ namespace RestfulQr.Entities
         /// </summary>
         public DbSet<CreatedQrCode> CreatedQrCodes { get; set; }
 
-        public RestfulQrDbContext(DbContextOptions<RestfulQrDbContext> options) : base(options)
+        public RestfulQrDbContext(DbContextOptions<RestfulQrDbContext> options, IWebHostEnvironment environment) : base(options)
         {
-
+            this.environment = environment;
         }
 
         /// <summary>
