@@ -13,6 +13,7 @@ using RestfulQr.Repositories;
 using RestfulQr.Repositories.Impl;
 using RestfulQr.Services;
 using RestfulQr.Services.Impl;
+using Serilog;
 using System;
 using System.IO;
 using System.Reflection;
@@ -97,6 +98,8 @@ namespace RestfulQr
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 
