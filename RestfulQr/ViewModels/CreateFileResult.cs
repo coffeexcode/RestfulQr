@@ -27,6 +27,11 @@ namespace RestfulQr.ViewModels
         /// </summary>
         public string Filename { get; set; }
 
+        /// <summary>
+        /// Creates an object representing a successfull file creation,
+        /// </summary>
+        /// <param name="filename">The name of the file that was created.</param>
+        /// <returns></returns>
         public static CreateFileResult Success(string filename)
         {
             return new CreateFileResult
@@ -36,6 +41,14 @@ namespace RestfulQr.ViewModels
             };
         }
 
+        /// <summary>
+        /// Creates an object representing a failure to create a file.
+        /// </summary>
+        /// <param name="message">
+        /// The message that caused the failure. This is usually the exception
+        /// that occured.
+        /// </param>
+        /// <returns></returns>
         public static CreateFileResult Failed(string message)
         {
             return new CreateFileResult

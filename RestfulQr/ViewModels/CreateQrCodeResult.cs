@@ -34,6 +34,14 @@ namespace RestfulQr.ViewModels
         /// </summary>
         public object Data { get; set; }
 
+        /// <summary>
+        /// Creates an object that represents a successfully created qr code.
+        /// </summary>
+        /// <param name="qrCode">
+        ///     The CreatedQrCode object that wass created.
+        ///     <see cref="CreatedQrCode"/>
+        /// </param>
+        /// <returns></returns>
         public static CreateQrCodeResult Success(CreatedQrCode qrCode)
         {
             return new CreateQrCodeResult
@@ -43,6 +51,14 @@ namespace RestfulQr.ViewModels
             };
         }
 
+        /// <summary>
+        /// Creates an object that represents a failured to create a qr code.
+        /// </summary>
+        /// <param name="message">
+        /// The error message that caused the failure. This is usually the exception that
+        /// occured.
+        /// </param>
+        /// <returns></returns>
         public static CreateQrCodeResult Failed(string message)
         {
             return new CreateQrCodeResult

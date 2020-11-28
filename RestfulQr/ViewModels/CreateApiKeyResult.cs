@@ -26,6 +26,11 @@ namespace RestfulQr.ViewModels
         /// </summary>
         public ApiKey ApiKey { get; set; }
 
+        /// <summary>
+        /// Creates a successfully created api key object.
+        /// </summary>
+        /// <param name="apiKey">The api key that was created</param>
+        /// <returns></returns>
         public static CreateApiKeyResult Success(ApiKey apiKey)
         {
             return new CreateApiKeyResult
@@ -35,6 +40,14 @@ namespace RestfulQr.ViewModels
             };
         }
 
+        /// <summary>
+        /// Creates a failed to create an api key object.
+        /// </summary>
+        /// <param name="message">
+        /// The error message that caused the failure. This should
+        /// usually be the exception that occured.
+        /// </param>
+        /// <returns></returns>
         public static CreateApiKeyResult Failed(string message)
         {
             return new CreateApiKeyResult

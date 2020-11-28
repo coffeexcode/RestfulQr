@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestfulQr.Services;
+using RestfulQr.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace RestfulQr.Controllers.Api.V1
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Create()
+        public async Task<ActionResult<CreateApiKeyResult>> Create()
         {
             try
             {

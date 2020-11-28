@@ -10,7 +10,6 @@ namespace RestfulQr.Entities
     {
         /// <summary>
         /// The generated api key.
-        /// <see cref="ApiKeyService.CreateApiKeyAsync"/>
         /// </summary>
         public string Key { get; set; }
 
