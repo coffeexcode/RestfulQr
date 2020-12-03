@@ -1,7 +1,6 @@
 ﻿using QRCoder;
 using RestfulQr.Core;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -25,7 +24,7 @@ namespace RestfulQr.Services.Impl
 
             encoderParams.Param[0] = new EncoderParameter(Encoder.Quality, options.Quality);
             encoderParams.Param[1] = new EncoderParameter(Encoder.Compression, options.Compression);
-            
+
             return encoderParams;
         }
 

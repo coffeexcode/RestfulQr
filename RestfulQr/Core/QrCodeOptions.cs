@@ -1,5 +1,4 @@
 ﻿using RestfulQr.Core.Middleware;
-using System.Drawing.Imaging;
 using static QRCoder.QRCodeGenerator;
 
 namespace RestfulQr.Core

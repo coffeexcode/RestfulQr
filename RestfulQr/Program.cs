@@ -14,7 +14,7 @@ namespace RestfulQr
                 .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.Seq("http://host.docker.internal:51303", period: TimeSpan.FromSeconds(5)) // Mapped to container port 5341 (default for seq)
+                .WriteTo.Seq("http://host.docker.internal:51303", period: TimeSpan.FromSeconds(5))
                 .CreateLogger();
 
             try
@@ -29,7 +29,7 @@ namespace RestfulQr
             finally
             {
                 Log.CloseAndFlush();
-            }     
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

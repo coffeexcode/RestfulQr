@@ -39,7 +39,7 @@ namespace RestfulQr
 
             services.AddDbContext<RestfulQrDbContext>(options =>
             {
-                options.UseInMemoryDatabase("demodb");
+                options.UseNpgsql(Configuration.GetSection("Db")["ConnectionString"]);
             });
 
             services.AddScoped<QrCodeOptions>();
@@ -86,7 +86,7 @@ namespace RestfulQr
                     });
 
                     context.SaveChanges();
-                } 
+                }
             }
 
             // Check to see if the destination folder exists, and if not, create it

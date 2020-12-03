@@ -9,6 +9,14 @@ services:
     ports:
       - 51301:80
       - 51300:443
+  db:
+    image: postgres:13.1
+    environment:
+      POSTGRES_USER: restfulqr-user
+      POSTGRES_PASSWORD: restfulqr
+      POSTGRES_DB: RestfulQr
+    ports:
+      - 5432:5432
   seq:
     image: datalust/seq
     ports: 

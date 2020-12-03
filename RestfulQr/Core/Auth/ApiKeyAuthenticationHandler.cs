@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RestfulQr.Services;
+using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -53,6 +54,7 @@ namespace RestfulQr.Core.Auth
 
             if (!exists)
             {
+                Log.Warning("An invalid API key was tried during request");
                 return AuthenticateResult.Fail("Invalid api key");
             }
 

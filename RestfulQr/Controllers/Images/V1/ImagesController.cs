@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using RestfulQr.Core;
 using RestfulQr.Core.Exceptions;
 using RestfulQr.Services;
+using Serilog;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -21,20 +20,17 @@ namespace RestfulQr.Controllers.Images.V1
         private readonly IImageFileService imageFileService;
         private readonly IQrCodeService qrCodeService;
         private readonly ApiKeyProvider apiKeyProvider;
-        private readonly ILogger<ImagesController> logger;
 
         public ImagesController(
             Services.IAuthorizationService authorizationService,
             IImageFileService imageFileService,
             IQrCodeService qrCodeService,
-            ApiKeyProvider apiKeyProvider,
-            ILogger<ImagesController> logger)
+            ApiKeyProvider apiKeyProvider)
         {
             this.authorizationService = authorizationService;
             this.imageFileService = imageFileService;
             this.qrCodeService = qrCodeService;
             this.apiKeyProvider = apiKeyProvider;
-            this.logger = logger;
         }
 
         /// <summary>
@@ -70,6 +66,7 @@ namespace RestfulQr.Controllers.Images.V1
 
                 if (!canAccess)
                 {
+                    Log.Warning("API Key {key} was used to try an access a valid image file that it does not own", new { key = apiKeyProvider.ApiKey });
                     return Forbid();
                 }
 
@@ -79,16 +76,20 @@ namespace RestfulQr.Controllers.Images.V1
                 var extension = ExtractExtensionFromFilename(filename);
 
                 return File(bytes, ImageUtil.GetMimeTypeByExtension(extension));
-            } catch (EntryNotFoundException) {
-                return NotFound();
-            } 
-            catch (FileNotFoundException)
+            }
+            catch (EntryNotFoundException e)
             {
+                Log.Information(e, "Attempted to delete a created qr code that was not found");
+                return NotFound();
+            }
+            catch (FileNotFoundException e)
+            {
+                Log.Information(e, "Attemped to delete a file that was not found");
                 return NotFound();
             }
             catch (Exception e)
             {
-                logger.LogCritical(e, $"Error while getting a qr code image: {filename}");
+                Log.Error(e, "Error while getting a qr code image with exception: {e}");
                 return StatusCode(500);
             }
         }
@@ -125,6 +126,7 @@ namespace RestfulQr.Controllers.Images.V1
 
                 if (!canAccess)
                 {
+                    Log.Warning("API Key {key} was used to try an access a valid image file that it does not own", new { key = apiKeyProvider.ApiKey });
                     return Forbid();
                 }
 
@@ -136,17 +138,17 @@ namespace RestfulQr.Controllers.Images.V1
             }
             catch (EntryNotFoundException e)
             {
-                logger.LogWarning(e, "Attempted to delete a created qr code that was not found");
+                Log.Information(e, "Attempted to delete a created qr code that was not found");
                 return NotFound();
             }
             catch (FileNotFoundException e)
             {
-                logger.LogWarning(e, "Attemped to delete a file that was not found");
+                Log.Information(e, "Attemped to delete a file that was not found");
                 return NotFound();
             }
             catch (Exception e)
             {
-                logger.LogCritical(e, "Unable to delete qr code");
+                Log.Error(e, "Unable to delete qr code");
                 return StatusCode(500);
             }
         }

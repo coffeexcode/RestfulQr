@@ -2,11 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using RestfulQr.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RestfulQr.Services.Impl
@@ -55,7 +53,7 @@ namespace RestfulQr.Services.Impl
                 using var fileStream = new FileStream(Path.Combine(fileSystemPath, filename), FileMode.Open, FileAccess.Read, FileShare.None);
 
                 var buffer = new byte[fileStream.Length];
-                
+
                 fileStream.Read(buffer, 0, Convert.ToInt32(fileStream.Length));
 
                 return buffer;
@@ -69,7 +67,8 @@ namespace RestfulQr.Services.Impl
                 await Task.Run(() => bmp.Save(Path.Combine(fileSystemPath, file), codec, encoderParameters));
 
                 return CreateFileResult.Success(file);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return CreateFileResult.Failed(e.Message);
             }

@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using RestfulQr.Services;
 using RestfulQr.ViewModels;
+using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -21,16 +18,13 @@ namespace RestfulQr.Controllers.Api.V1
     public class QrCodeController : ControllerBase
     {
         private readonly IQrCodeService qrCodeService;
-        private readonly ILogger<QrCodeController> logger;
         private readonly IImageFileService imageFileService;
 
         public QrCodeController(
             IQrCodeService qrCodeService,
-            ILogger<QrCodeController> logger,
             IImageFileService imageFileService)
         {
             this.qrCodeService = qrCodeService;
-            this.logger = logger;
             this.imageFileService = imageFileService;
         }
 
@@ -71,11 +65,11 @@ namespace RestfulQr.Controllers.Api.V1
                     return Created(BuildAppUrl(result.CreatedQrCode.Filename), result);
                 }
 
-                throw new Exception("Error creating qr code"); 
+                throw new Exception("Error creating qr code");
             }
             catch (Exception e)
             {
-                logger.LogCritical(e, "Failed to create a QR code");
+                Log.Error(e, "Failed to create a QR code");
 
                 return StatusCode(500);
             }

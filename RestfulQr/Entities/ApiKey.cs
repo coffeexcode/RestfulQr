@@ -1,5 +1,4 @@
-﻿using RestfulQr.Services.Impl;
-using System;
+﻿using System;
 
 namespace RestfulQr.Entities
 {

@@ -30,7 +30,7 @@ namespace RestfulQr.Core.Middleware
 
         private int DefaultPixelsPerModule;
 
-        
+
         public QrCodeOptionsExtractionMiddleware(RequestDelegate next)
         {
             this.next = next;
@@ -151,7 +151,8 @@ namespace RestfulQr.Core.Middleware
             if (!IsValidColourCode(colour))
             {
                 return DefaultDarkColour;
-            } else return colour;
+            }
+            else return colour;
         }
 
         /// <summary>
@@ -180,7 +181,7 @@ namespace RestfulQr.Core.Middleware
             if (truthyValues.Contains(input.ToLower()))
             {
                 return true;
-            } 
+            }
             else if (falsyValues.Contains(input.ToLower()))
             {
                 return false;
@@ -205,7 +206,7 @@ namespace RestfulQr.Core.Middleware
                 }
 
                 throw new Exception("PixelsPerModule must be between 20 and 40");
-            } 
+            }
             catch
             {
                 return DefaultPixelsPerModule;
@@ -229,8 +230,8 @@ namespace RestfulQr.Core.Middleware
                 }
 
                 throw new Exception("Compression must be between 0 and 100");
-            } 
-            catch 
+            }
+            catch
             {
                 return DefaultCompression;
             }
@@ -253,8 +254,8 @@ namespace RestfulQr.Core.Middleware
                 }
 
                 throw new Exception("Quality must be between 0 and 100");
-            } 
-            catch 
+            }
+            catch
             {
                 return DefaultQuality;
             }

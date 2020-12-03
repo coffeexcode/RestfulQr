@@ -1,11 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
-using RestfulQr.Core;
+﻿using RestfulQr.Core;
 using RestfulQr.Entities;
 using RestfulQr.Repositories;
 using RestfulQr.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RestfulQr.Services.Impl
@@ -61,7 +58,7 @@ namespace RestfulQr.Services.Impl
 
             return result == null
                 ? CreateQrCodeResult.Failed("Unable to save result")
-                : CreateQrCodeResult.Success(result);       
+                : CreateQrCodeResult.Success(result);
         }
 
         public async Task DeleteAsync(string filename)
@@ -74,7 +71,7 @@ namespace RestfulQr.Services.Impl
                 // Delete from the backing store
                 await qrCodeRepository.DeleteQrCodeAsync(filename);
                 await qrCodeRepository.SaveChangesAsync();
-            } 
+            }
             catch
             {
                 throw new Exception("Error deleting qr code");
