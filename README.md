@@ -96,7 +96,7 @@ For example,
 ```
 
 You will also need to set bind your docker containers with the right volume for your credentials in `docker-compose.override.yml`
-### Installation & Starting
+### Installation
 
 1. Clone the repo
    ```sh
@@ -210,7 +210,7 @@ Project Link: [https://github.com/coffeexcode/RestfulQr](https://github.com/coff
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[issues-shield]: https://img.shields.io/github/issues/coffeexcode/restfulqr.svg?style=for-the-badge
-[issues-url]: https://github.com/coffeexcode/restfulqr/issues
-[license-shield]: https://img.shields.io/github/license/coffeexcode/restfulqr.svg?style=for-the-badge
-[license-url]: https://github.com/coffeexcode/restfulqr/blob/master/LICENSE.txt
+[issues-shield]: https://img.shields.io/github/issues/coffeexcode/RestfulQr.svg?style=plastic
+[issues-url]: https://github.com/coffeexcode/RestfulQr/issues
+[license-shield]: https://img.shields.io/github/license/coffeexcode/RestfulQr.svg?style=plastic
+[license-url]: https://github.com/coffeexcode/RestfulQr/blob/main/LICENSE
