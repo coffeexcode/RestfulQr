@@ -79,6 +79,23 @@ You will need Docker installed in order to run the project via docker-compose.
 * Atleast [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0) installed to debug and run via `dotnet`
 * _Optional: Visual Studo 2019_
 
+### AWS
+RestfulQr uses S3 to persist images. You will need to create a S3 bucket to use. Once you create the bucket, you need to configure the
+appSettings.json file with your values.
+
+For example,
+```json
+  "AWS": {
+    "Profile": "your-profile",
+    "Region": "your-region",
+    "ProfilesLocation": "your-aws-credentials"
+  },
+  "S3": {
+    "BucketName": "your-bucket-name"
+  }
+```
+
+You will also need to set bind your docker containers with the right volume for your credentials in `docker-compose.override.yml`
 ### Installation & Starting
 
 1. Clone the repo
@@ -96,7 +113,7 @@ You will need Docker installed in order to run the project via docker-compose.
 This project is meant to be incredibly simple to use if you are familiar with REST. For testing and development, the
 recommended tool is [Postman](https://www.postman.com/). 
 
-_Note: These steps assume that you are running locally with the default URL settings. This implies the application is running at_ http://localhost:51300
+_Note: These steps assume that you are running locally with the default URL settings. This implies the application is running at_ http://localhost:14000
 
 
 You can generate a retrieve your first QR code using the following steps:
@@ -110,11 +127,11 @@ You can generate a retrieve your first QR code using the following steps:
      _Note: If you are running in development, you can skip this step and replace the api key with 'development' for future steps._
 
     ```sh
-    curl --location --request POST 'https://localhost:51300/api/v1/apikey'
+    curl --location --request POST 'https://localhost:14000/api/v1/apikey'
     ```
 3. Use the API key to generate a simple QR code from JSON data with default settings.
     ```sh
-    curl --location --request POST 'https://localhost:51300/api/v1/qrcode/json' \
+    curl --location --request POST 'https://localhost:14000/api/v1/qrcode/json' \
     --header 'X-Api-Key: YOUR-API-KEY-GOES-HERE' \
     --header 'Content-Type: application/json' \
     --data-raw '{
@@ -139,12 +156,12 @@ You can generate a retrieve your first QR code using the following steps:
     ```
 4. Retrieve your QR code! Pass the filename from step #3 into the URL of the following
     ```sh
-    curl --location --request GET 'https://localhost:51300/images/3bc3d64e-05b8-4af5-a106-dcaff7815bd3.png' \
+    curl --location --request GET 'https://localhost:14000/images/3bc3d64e-05b8-4af5-a106-dcaff7815bd3.png' \
     --header 'X-Api-Key: development'
     ```
 
 ## Help
-RestfulQR has swagger built in. While running in development, you can browse to http://localhost:51300/swagger/index.html to view 
+RestfulQR has swagger built in. While running in development, you can browse to http://localhost:14000/swagger/index.html to view 
 the swagger definintion and examples of using all of the endpoints available.
 
 <!-- ROADMAP -->

@@ -2,12 +2,41 @@ version: '3.4'
 
 services:
   restfulqr.api:
+    container_name: restfulqr.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionStrings__QrCodeDb=User ID=localadmin;Password=localadmin;Host=restfulqr.db;Port=5432;Database=restfulqr;Pooling=true;
+      - Redis__Configuration=restfulqr.caching:6379
+      - AWS__ProfilesLocation=/home/app/.aws/credentials
     ports:
-      - "80"
-      - "443"
+      - 14000:443
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - C:\Users\Nate\.aws\credentials:/home/app/.aws/credentials:ro
+    depends_on:
+      - restfulqr.db
+      - restfulqr.caching
+
+  restfulqr.db:
+    container_name: restfulqr.db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: localadmin
+      POSTGRES_PASSWORD: localadmin
+      POSTGRES_DB: restfulqr
+    ports:
+        - 5432:5432
+    volumes:
+        - '~/restfulqr/postgres:/var/lib/postgresql/data'
+
+  restfulqr.caching:
+    container_name: restfulqr.caching
+    restart: unless-stopped
+    ports:
+        - 6379:6379
+    environment:
+        - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+        - '~/restfulqr/redis:/usr/local/etc/redis'

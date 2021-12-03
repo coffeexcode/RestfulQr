@@ -21,9 +21,15 @@ namespace RestfulQr
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -31,6 +37,8 @@ namespace RestfulQr
             // Migrations
             services.AddDbContext<RestfulQrDbContext>(options =>
             {
+                var config = Configuration.GetConnectionString("QrCodeDb");
+
                 options.UseNpgsql(Configuration.GetConnectionString("QrCodeDb"), x => x.MigrationsAssembly("RestfulQr.Migrations"));
             });
 
@@ -80,13 +88,15 @@ namespace RestfulQr
             services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration config)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RestfulQrDbContext context)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestfulQr v1"));
+
+                context.Database.Migrate();
             }
 
             app.UseHttpsRedirection();

@@ -8,10 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.1" />
-    <PackageReference Include="AWSSDK.S3" Version="3.7.3.21" />
-    <PackageReference Include="Dapper" Version="2.0.90" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
-    <PackageReference Include="QRCoder" Version="1.4.1" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.7.1" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
+    <PackageReference Include="QRCoder" Version="1.4.2" />
   </ItemGroup>
 
   <ItemGroup>

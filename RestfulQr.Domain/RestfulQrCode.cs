@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,6 +45,7 @@ namespace RestfulQr.Domain
         /// <summary>
         /// The model serialized as JSON
         /// </summary>
+        [NotMapped]
         public object Model { get; set; }
 
         /// <summary>

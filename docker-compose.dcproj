@@ -5,6 +5,11 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>b1880a4d-fc66-452a-aab9-3d15e620cd81</ProjectGuid>
   </PropertyGroup>
+  <PropertyGroup>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerServiceName>restfulqr.api</DockerServiceName>
+    <DockerServiceUrl>https://localhost:14000/swagger</DockerServiceUrl>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>

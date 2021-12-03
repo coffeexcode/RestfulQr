@@ -6,26 +6,11 @@ services:
     build:
       context: .
       dockerfile: RestfulQr.Api/Dockerfile
-    restart: unless-stopped
-    ports:
-        - 14000:443
+
   restfulqr.db:
     image: postgres
     restart: unless-stopped
-    environment:
-      POSTGRES_USER: example_user
-      POSTGRES_PASSWORD: example_password_1!
-      POSTGRES_DB: RestfulQr
-    ports:
-        - 14001:5432
-    volumes:
-        - '~/restfulqr/postgresql:/var/lib/postgresql/data'
+
   restfulqr.caching:
     image: redis
     restart: unless-stopped
-    ports:
-        - 14002:6379
-    environment:
-        - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-        - '~/restfulqr/redis:/usr/local/etc/redis'

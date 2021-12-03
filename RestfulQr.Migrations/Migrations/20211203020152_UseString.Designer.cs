@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RestfulQr.Migrations;
@@ -11,9 +12,10 @@ using RestfulQr.Migrations;
 namespace RestfulQr.Migrations.Migrations
 {
     [DbContext(typeof(RestfulQrDbContext))]
-    partial class RestfulQrDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211203020152_UseString")]
+    partial class UseString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

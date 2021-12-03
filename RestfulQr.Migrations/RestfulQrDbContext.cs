@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RestfulQr.Domain;
+using System.Text.Json;
 
 namespace RestfulQr.Migrations
 {
@@ -37,9 +38,11 @@ namespace RestfulQr.Migrations
                 e.Property(x => x.Type).HasColumnName("type").IsRequired();
                 e.Property(x => x.Created).HasColumnName("created").IsRequired();
                 e.Property(x => x.CreatedBy).HasColumnName("created_by").IsRequired();
-                e.Property(x => x.Model).HasColumnName("model").IsRequired();
+                e.Property(x => x.Model).HasColumnName("model").IsRequired().HasConversion(
+                    v => v.ToString(),
+                    v => JsonSerializer.Deserialize<object>(v, new JsonSerializerOptions())
+                );
                 e.Property(x => x.PublicUrl).HasColumnName("public_url").IsRequired();
-
                 e.HasOne<ApiKey>().WithMany().HasForeignKey(x => x.CreatedBy);
             });
         }
