@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8eb9b350-9f46-41fa-a2ba-cc3ce1ada1c2",
+		"_postman_id": "f636b0af-82d0-443d-84dd-1930d349dc97",
 		"name": "QR Codes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"content\": \"hi!\"\r\n}",
+					"raw": "{\r\n    \"content\": \"Hello world!\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,12 +20,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/text",
+					"raw": "https://localhost:14000/api/v1/qrcode/text",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -51,12 +51,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/json",
+					"raw": "https://localhost:14000/api/v1/qrcode/json",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -103,12 +103,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/calendar",
+					"raw": "https://localhost:14000/api/v1/qrcode/calendar",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -134,12 +134,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/bookmark",
+					"raw": "https://localhost:14000/api/v1/qrcode/bookmark",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -165,12 +165,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/geolocation",
+					"raw": "https://localhost:14000/api/v1/qrcode/geolocation",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -196,12 +196,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/email",
+					"raw": "https://localhost:14000/api/v1/qrcode/email",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -227,12 +227,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/message",
+					"raw": "https://localhost:14000/api/v1/qrcode/message",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -258,12 +258,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/website",
+					"raw": "https://localhost:14000/api/v1/qrcode/website",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -289,12 +289,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/whatsapp",
+					"raw": "https://localhost:14000/api/v1/qrcode/whatsapp",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -320,12 +320,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/wifi",
+					"raw": "https://localhost:14000/api/v1/qrcode/wifi",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -351,12 +351,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/api/v1/qrcode/contact",
+					"raw": "https://localhost:14000/api/v1/qrcode/contact",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -366,15 +366,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Retrieve All Created Qr Codes",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": null
-			},
-			"response": []
 		}
 	],
 	"auth": {
@@ -382,7 +373,7 @@
 		"apikey": [
 			{
 				"key": "value",
-				"value": "482c6ae2-8a6b-4869-9fa6-36b1dc77ee10",
+				"value": "b936a9bc-93a6-4e1d-aa6e-3a660f74813d",
 				"type": "string"
 			},
 			{

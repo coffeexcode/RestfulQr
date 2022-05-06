@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d4422d2e-785a-4376-8587-39c975ddaf7a",
+		"_postman_id": "71aef9e9-25f8-45a2-b6b5-7efec78bc9d5",
 		"name": "Api Keys",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,12 +11,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5000/api/v1/apiKey",
+					"raw": "https://localhost:14000/api/v1/apiKey",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
@@ -47,12 +47,12 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:5000/api/v1/apiKey/5e37ab55-96c9-4bb8-b2b3-1a5f36a89e61/",
+					"raw": "https://localhost:14000/api/v1/apiKey/5e37ab55-96c9-4bb8-b2b3-1a5f36a89e61/",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "14000",
 					"path": [
 						"api",
 						"v1",
