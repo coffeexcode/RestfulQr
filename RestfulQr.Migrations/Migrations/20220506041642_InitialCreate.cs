@@ -42,7 +42,7 @@ namespace RestfulQr.Migrations.Migrations
                     created_by = table.Column<Guid>(type: "uuid", nullable: false),
                     filename = table.Column<string>(type: "text", nullable: false),
                     model = table.Column<string>(type: "text", nullable: false),
-                    PublicUrl = table.Column<string>(type: "text", nullable: true)
+                    public_url = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

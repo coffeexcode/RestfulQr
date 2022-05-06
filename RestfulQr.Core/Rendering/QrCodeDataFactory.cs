@@ -1,6 +1,8 @@
 using QRCoder;
 using RestfulQr.Domain;
 using RestfulQr.Domain.ViewModels;
+using System;
+using System.Threading.Tasks;
 using static QRCoder.PayloadGenerator;
 
 namespace RestfulQr.Core.Rendering

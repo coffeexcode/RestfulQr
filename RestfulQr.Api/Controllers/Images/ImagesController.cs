@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RestfulQr.Api.Core.Providers;
 using RestfulQr.Api.Services.Impl;
 using RestfulQr.Core.Util;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RestfulQr.Api.Controllers.Images
 {

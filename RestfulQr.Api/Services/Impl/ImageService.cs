@@ -3,6 +3,11 @@ using RestfulQr.Domain;
 using RestfulQr.Persistence;
 using RestfulQr.Persistence.Local;
 using RestfulQr.Persistence.S3;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RestfulQr.Api.Services.Impl
 {
@@ -29,14 +34,14 @@ namespace RestfulQr.Api.Services.Impl
             return await repository.GetAllAsync(key);
         }
 
-        public async Task<byte[]?> GetImageAsync(long locationId, string filename)
+        public async Task<byte[]?> GetImageAsync(ApiKey apiKey, string filename)
         {
-            if (!IsValid(locationId, filename))
+            if (!IsValid(apiKey.LocationId, filename))
             {
                 return null;
             }
 
-            var imagePath = BuildImagePath(locationId, filename);
+            var imagePath = BuildImagePath(apiKey.LocationId, filename);
 
             // Check cache
             var cacheBytes = await imageCache.GetAsync(imagePath);
@@ -55,8 +60,8 @@ namespace RestfulQr.Api.Services.Impl
                 }
             }
 
-            // Fetch image from AWS
-            var imageBytes = await imagePersistor.GetImageAsync(locationId, filename);
+            // Fetch image from configured storage
+            var imageBytes = await imagePersistor.GetImageAsync(apiKey, filename);
 
             if (imageBytes == null)
             {

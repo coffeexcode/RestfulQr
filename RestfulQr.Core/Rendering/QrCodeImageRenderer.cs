@@ -1,4 +1,6 @@
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using QRCoder;
 using RestfulQr.Core.Util;
 using RestfulQr.Domain;

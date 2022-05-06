@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using static QRCoder.PayloadGenerator.ContactData;
 
 namespace RestfulQr.Domain.ViewModels

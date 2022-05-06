@@ -17,7 +17,6 @@ namespace RestfulQr.UnitTests.Api.Services
     [TestFixture, Category("unit")]
     public class ImageServiceTests
     {
-        private ApiKey apiKey = GetApiKey();
         private byte[] imageData = new byte[1024];
 
         private long defaultLocationId = 1;
@@ -58,7 +57,7 @@ namespace RestfulQr.UnitTests.Api.Services
             var service = GetImageService();
 
             // Act
-            var result = await service.UploadAsync(apiKey, filename, imageData);
+            var result = await service.UploadAsync(GetApiKey(), filename, imageData);
 
             // Assert
             imageCacheMock.Verify(x => x.SetAsync(path, imageData));
@@ -91,7 +90,7 @@ namespace RestfulQr.UnitTests.Api.Services
             var service = GetImageService();
 
             // Act
-            var result = await service.GetImageAsync(defaultLocationId, filename);
+            var result = await service.GetImageAsync(GetApiKey(), filename);
 
             // Assert
             imageCacheMock.Verify(x => x.SetAsync(It.IsAny<string>(), imageData));
@@ -111,7 +110,7 @@ namespace RestfulQr.UnitTests.Api.Services
             var service = GetImageService();
 
             // Act
-            var result = await service.GetImageAsync(defaultLocationId, filename);
+            var result = await service.GetImageAsync(GetApiKey(), filename);
 
             // Assert
             imageCacheMock.Verify(x => x.GetAsync(It.IsAny<string>()));
@@ -131,7 +130,7 @@ namespace RestfulQr.UnitTests.Api.Services
             var service = GetImageService();
 
             // Act
-            var result = await service.GetImageAsync(defaultLocationId, filename);
+            var result = await service.GetImageAsync(GetApiKey(), filename);
 
             // Assert
             imageCacheMock.Verify(x => x.GetAsync(It.IsAny<string>()));
@@ -152,7 +151,7 @@ namespace RestfulQr.UnitTests.Api.Services
             var service = GetImageService();
 
             // Act
-            var result = await service.GetImageAsync(defaultLocationId, filename);
+            var result = await service.GetImageAsync(GetApiKey(), filename);
 
             // Assert
             imageCacheMock.Verify(x => x.GetAsync(It.IsAny<string>()));
@@ -170,14 +169,14 @@ namespace RestfulQr.UnitTests.Api.Services
             );
         }
 
-        private static ApiKey GetApiKey()
+        private ApiKey GetApiKey()
         {
             return new ApiKey()
             {
                 Created = DateTime.Now,
                 Id = Guid.NewGuid(),
                 LastUsed = DateTime.Now,
-                LocationId = 1
+                LocationId = defaultLocationId
             };
         }
     }

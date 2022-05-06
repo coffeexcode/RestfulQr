@@ -1,4 +1,5 @@
 using RestfulQr.Domain;
+using System.Threading.Tasks;
 
 namespace RestfulQr.Core.Rendering
 {

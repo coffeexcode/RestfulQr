@@ -1,4 +1,5 @@
 using RestfulQr.Domain;
+using System;
 
 namespace RestfulQr.Core.Util.Extensions
 {

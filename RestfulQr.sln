@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulQr.Persistence", "Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestfulQr.UnitTests", "RestfulQr.UnitTests\RestfulQr.UnitTests.csproj", "{9C87C3FF-B703-4B07-A09D-D891456C363C}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{B1880A4D-FC66-452A-AAB9-3D15E620CD81}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5DE79C07-7122-44BF-B3E9-722A8DE10B23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{9C87C3FF-B703-4B07-A09D-D891456C363C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C87C3FF-B703-4B07-A09D-D891456C363C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C87C3FF-B703-4B07-A09D-D891456C363C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1880A4D-FC66-452A-AAB9-3D15E620CD81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1880A4D-FC66-452A-AAB9-3D15E620CD81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1880A4D-FC66-452A-AAB9-3D15E620CD81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1880A4D-FC66-452A-AAB9-3D15E620CD81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DE79C07-7122-44BF-B3E9-722A8DE10B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE79C07-7122-44BF-B3E9-722A8DE10B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE79C07-7122-44BF-B3E9-722A8DE10B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE79C07-7122-44BF-B3E9-722A8DE10B23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

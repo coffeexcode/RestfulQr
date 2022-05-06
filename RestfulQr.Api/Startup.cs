@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using RestfulQr.Api.Core;
 using RestfulQr.Api.Core.Auth;
@@ -13,6 +17,8 @@ using RestfulQr.Persistence;
 using RestfulQr.Persistence.Local;
 using RestfulQr.Persistence.S3;
 using Serilog;
+using System;
+using System.IO;
 using System.Reflection;
 
 namespace RestfulQr
@@ -68,8 +74,25 @@ namespace RestfulQr
             // Persistence
             services.AddScoped<IApiKeyRepository, ApiKeyRepository>();
             services.AddScoped<IRestfulQrCodeRepository, RestfulQrCodeRepository>();
-            services.AddScoped<IImagePersistor, S3ImagePersistor>();
 
+            // Image Persistence
+            if (Configuration["StorageEngine"] == "s3")
+            {
+                // AWS
+                services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+                services.AddScoped<IImagePersistor, S3ImagePersistor>();
+            } 
+            else if (Configuration["StorageEngine"] == "local")
+            {
+                // Create the directory
+                Directory.CreateDirectory(Configuration.GetSection("LocalStorage")["Path"]);
+                services.AddScoped<IImagePersistor, LocalImagePersistor>();
+            } 
+            else
+            {
+                throw new ArgumentException("Configuration must contain a valid value for \"StorageEngine\"");
+            }
+            
             // Rendering
             services.AddScoped<IQrCodeRenderer, Renderer>();
 
@@ -82,15 +105,12 @@ namespace RestfulQr
                 c.IncludeXmlComments(xmlPath);
             });
 
-            // AWS
-            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
-
             services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RestfulQrDbContext context)
         {
-            if (env.IsDevelopment())
+            if (env.EnvironmentName == "Development")
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
@@ -98,8 +118,6 @@ namespace RestfulQr
 
                 context.Database.Migrate();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseSerilogRequestLogging();
 

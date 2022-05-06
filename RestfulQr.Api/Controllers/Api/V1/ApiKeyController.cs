@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestfulQr.Api.Core.Providers;
 using RestfulQr.Api.Services;
@@ -107,7 +108,7 @@ namespace RestfulQr.Api.Controllers.Api.V1
             }
             catch (Exception e)
             {
-                Log.Error(e, $"An error occured while trying to delete an api key '{apiKeyProvider.ApiKey.ToString}'");
+                Log.Error(e, $"An error occured while trying to delete an api key '{apiKeyProvider.ApiKey}'");
                 return StatusCode(500);
             }
         }
